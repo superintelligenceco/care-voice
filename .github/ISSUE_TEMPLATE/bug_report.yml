@@ -1,0 +1,59 @@
+name: Bug report
+description: Something in care-voice does not work as documented.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not paste real transcripts, names, phone numbers, or health details. Reproduce the problem with made-up replies instead.
+        For a security issue, follow SECURITY.md instead of opening an issue.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: Describe the problem and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: The command you ran and, if relevant, a replies file or script snippet.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output
+      description: The relevant output or traceback.
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: care-voice version
+      description: Output of `care-voice --version`.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Conversation engine or script
+        - Rule-based extractor
+        - LLM extractor
+        - Alert rules
+        - Notifiers
+        - Dashboard
+        - Telephony (experimental)
+        - Docker or packaging
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system and Python version.
+      placeholder: Ubuntu 24.04, Python 3.12
