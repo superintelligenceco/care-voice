@@ -1,0 +1,45 @@
+{
+  "machine_info": {
+    "python_version": "3.12.9",
+    "machine": "aarch64",
+    "system": "Linux"
+  },
+  "benchmarks": [
+    {
+      "name": "test_bench_detect_flags",
+      "stats": {
+        "min": 4.3079257011413574e-05,
+        "median": 4.3839216232299805e-05,
+        "mean": 0.00010938509186234259,
+        "rounds": 3804
+      }
+    },
+    {
+      "name": "test_bench_extract_answer",
+      "stats": {
+        "min": 1.887977123260498e-05,
+        "median": 1.9244849681854248e-05,
+        "mean": 5.811612185968552e-05,
+        "rounds": 20974
+      }
+    },
+    {
+      "name": "test_bench_full_checkin",
+      "stats": {
+        "min": 0.0002520419657230377,
+        "median": 0.00025727972388267517,
+        "mean": 0.0006254957409566669,
+        "rounds": 1672
+      }
+    },
+    {
+      "name": "test_bench_risk_engine",
+      "stats": {
+        "min": 6.683915853500366e-05,
+        "median": 6.807968020439148e-05,
+        "mean": 0.0001153648831095802,
+        "rounds": 6399
+      }
+    }
+  ]
+}
