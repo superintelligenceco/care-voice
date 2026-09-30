@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "care-voice"
-version = "0.1.0"
+version = "0.2.0"
 description = "Open-source daily voice check-in agent for older adults living alone, with caregiver alerts."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -22,7 +22,7 @@ classifiers = [
   "Programming Language :: Python :: 3.13",
   "Topic :: Communications :: Telephony",
 ]
-dependencies = ["PyYAML>=6.0"]
+dependencies = ["PyYAML>=6.0", "tzdata; sys_platform == \"win32\""]
 
 [project.optional-dependencies]
 dev = [
