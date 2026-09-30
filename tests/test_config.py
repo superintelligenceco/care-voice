@@ -64,7 +64,8 @@ def test_full_config(monkeypatch, tmp_path):
     assert cfg.checkin.max_reprompts == 2
     assert cfg.rules.pain_high_threshold == 5
     assert cfg.rules.ids.mood == "feeling"
-    assert cfg.resolve("/tmp/x.db") == "/tmp/x.db"
+    absolute = str(tmp_path / "abs" / "x.db")
+    assert cfg.resolve(absolute) == absolute
     assert cfg.resolve("rel.db") == str(tmp_path / "rel.db")
     extractor = cfg.build_extractor()
     assert isinstance(extractor, LLMExtractor)
