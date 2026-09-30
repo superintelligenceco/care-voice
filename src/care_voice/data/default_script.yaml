@@ -1,0 +1,64 @@
+# The default daily check-in. Copy this file and point `script:` in your
+# config at the copy to change the wording or add questions.
+name: daily-morning
+greeting: >-
+  Good morning, {name}. This is your daily check-in call. It only takes a
+  couple of minutes.
+closing: >-
+  Thank you, {name}. That's everything for today. Have a lovely day, and
+  I'll call again tomorrow.
+emergency_notice: >-
+  That sounds serious. If you need urgent help, please hang up and call your
+  local emergency number now. I'm also letting your caregiver know.
+reprompt_prefix: "Sorry, I didn't quite catch that."
+questions:
+  - id: slept_well
+    type: yes_no
+    ask: "Did you sleep well last night?"
+    reprompt: "Did you get a good night's sleep? A yes or no is fine."
+
+  - id: took_meds
+    type: yes_no
+    ask: "Have you taken your morning medication?"
+    reprompt: "Have you taken your morning pills yet? Yes or no is fine."
+
+  - id: has_eaten
+    type: yes_no
+    ask: "Have you had something to eat today?"
+    reprompt: "Have you had breakfast or anything to eat yet?"
+
+  - id: in_pain
+    type: yes_no
+    polarity: problem
+    ask: "Are you in any pain today?"
+    reprompt: "Is anything hurting you today? Yes or no is fine."
+    followups:
+      - when: true
+        id: pain_level
+        type: scale
+        min: 0
+        max: 10
+        ask: "I'm sorry to hear that. On a scale from 0 to 10, how bad is the pain?"
+        reprompt: "Could you give me a number from 0 to 10 for the pain?"
+      - when: true
+        id: pain_where
+        type: text
+        ask: "Where does it hurt?"
+
+  - id: had_fall
+    type: yes_no
+    polarity: problem
+    ask: "Have you had a fall or a stumble since we last spoke?"
+    reprompt: "Have you fallen down at all since yesterday? Yes or no is fine."
+
+  - id: day_of_week
+    type: day_of_week
+    ask: "Just so I have it right, can you tell me what day of the week it is today?"
+    reprompt: "What day of the week is it today? For example, Monday or Tuesday."
+
+  - id: mood
+    type: scale
+    min: 1
+    max: 5
+    ask: "Last one. From 1 to 5, where 5 is wonderful, how are you feeling today?"
+    reprompt: "Could you give me a number from 1 to 5 for how you feel today?"

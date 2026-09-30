@@ -1,0 +1,25 @@
+# A shorter evening check-in. It keeps the question ids the alert rules know
+# (took_meds, has_eaten, had_fall, mood), so the same rules apply.
+name: gentle-evening
+greeting: "Good evening, {name}. It's time for our quick evening chat."
+closing: "Thank you, {name}. Sleep well, and I'll call tomorrow morning."
+questions:
+  - id: took_meds
+    type: yes_no
+    ask: "Did you take your evening tablets?"
+    reprompt: "Have you had your evening tablets yet?"
+  - id: has_eaten
+    type: yes_no
+    ask: "Have you had dinner?"
+  - id: had_fall
+    type: yes_no
+    polarity: problem
+    ask: "Any falls or stumbles today?"
+  - id: mood
+    type: scale
+    min: 1
+    max: 5
+    ask: "From 1 to 5, how was your day?"
+  - id: note
+    type: text
+    ask: "Is there anything you'd like me to pass on to your family?"
