@@ -4,6 +4,31 @@ All notable changes to this project are documented in this file. The format foll
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-30
+
+This release makes care-voice installable without a Python toolchain and hardens how it is built and shipped. The check-in engine, extractors, and alert rules behave exactly as in 0.1.0.
+
+### Added
+
+- Published on PyPI: `pip install care-voice`.
+- Standalone executables for Linux x64 and arm64, macOS arm64 and x64, and Windows x64, attached to every GitHub Release.
+- `install.sh`, a `curl | sh` installer that downloads the right executable for your system and checks it against `SHA256SUMS`.
+- Multi-arch container image `ghcr.io/superintelligenceco/care-voice` (`linux/amd64`, `linux/arm64`), signed with cosign, and a release Compose file that runs it.
+- SPDX SBOM, checksums, and build provenance attestations for every release file and the image.
+- Documentation site at <https://superintelligenceco.github.io/care-voice/> with a quickstart, concepts, CLI and Python API reference, FAQ, architecture diagrams, and decision records.
+- Demo GIF recorded from a real terminal session.
+- Property-based tests for the parsers and alert rules, a test that runs the README commands and compares their output, a benchmark gate against a committed baseline, a nightly full-suite workflow, and weekly mutation testing.
+- OpenSSF Scorecard, dependency review, Trivy image scanning, actionlint, and Markdown link checking in CI.
+- Makefile, pre-commit hooks, dev container for GitHub Codespaces, editor settings, `CITATION.cff`, and `llms.txt`.
+
+### Changed
+
+- Releases start from a pushed `v*` tag; release-please is gone.
+
+### Fixed
+
+- On Windows, `pip install care-voice` now pulls in `tzdata`, so time zones such as `UTC` resolve without a system time zone database.
+
 ## [0.1.0] - 2026-09-30
 
 The first public release. care-voice runs a daily check-in conversation, stores the results locally, and alerts caregivers when replies look concerning. It is not a medical device and not an emergency service.
@@ -23,5 +48,6 @@ The first public release. care-voice runs a daily check-in conversation, stores 
 - Dockerfile and Docker Compose file for the dashboard.
 - CI for lint, format, typecheck, and tests on Linux and macOS with Python 3.11 to 3.13, plus CodeQL, a Docker build check, and release automation.
 
-[Unreleased]: https://github.com/superintelligenceco/care-voice/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/superintelligenceco/care-voice/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/superintelligenceco/care-voice/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/superintelligenceco/care-voice/releases/tag/v0.1.0
