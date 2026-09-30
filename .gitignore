@@ -36,6 +36,14 @@ care-voice.local.yaml
 
 # Editors and OS
 .idea/
-.vscode/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
 *.swp
 .DS_Store
+
+# Docs and benchmark output
+site/
+bench.json
+.hypothesis/
+.benchmarks/

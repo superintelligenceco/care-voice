@@ -1,0 +1,39 @@
+# Mirrors the CI linters. Install with `pre-commit install` (or `make setup`).
+# Hook revisions are pinned to commit SHAs; update them with
+# `pre-commit autoupdate --freeze`.
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # frozen: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=2048"]
+      - id: detect-private-key
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: a56c0b927e6465d37cae3e97d35d4d18ab2b96cd # frozen: v0.16.9
+    hooks:
+      - id: ruff-check
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: 7ff8d35ae36a7d2b968f2f90b4c723e292e594ee # frozen: v2.3.1
+    hooks:
+      - id: mypy
+        # Check the whole project with the settings in pyproject.toml, like CI.
+        pass_filenames: false
+        args: []
+        additional_dependencies:
+          - types-PyYAML
+          - pytest>=8
+          - pytest-benchmark>=4
+          - hypothesis>=6.100
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: 914e7df21a07ef503a81201c76d2b11c789d3fca # frozen: v1.7.12
+    hooks:
+      - id: actionlint

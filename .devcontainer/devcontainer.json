@@ -1,0 +1,25 @@
+{
+  "name": "care-voice",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "postCreateCommand": "pip install --upgrade pip && pip install -e '.[dev,docs]' build pre-commit && pre-commit install",
+  "forwardPorts": [8080, 8000],
+  "portsAttributes": {
+    "8080": { "label": "Caregiver dashboard" },
+    "8000": { "label": "Docs preview" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.mypy-type-checker",
+        "charliermarsh.ruff",
+        "redhat.vscode-yaml",
+        "editorconfig.editorconfig"
+      ]
+    }
+  }
+}

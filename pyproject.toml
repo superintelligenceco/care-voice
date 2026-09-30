@@ -25,7 +25,16 @@ classifiers = [
 dependencies = ["PyYAML>=6.0"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "pytest-cov>=5", "ruff>=0.6", "mypy>=1.10", "types-PyYAML"]
+dev = [
+  "pytest>=8",
+  "pytest-cov>=5",
+  "pytest-benchmark>=4",
+  "hypothesis>=6.100",
+  "ruff>=0.6",
+  "mypy>=1.10",
+  "types-PyYAML",
+]
+docs = ["mkdocs-material>=9.5", "mkdocstrings[python]>=0.26"]
 
 [project.scripts]
 care-voice = "care_voice.cli:main"
@@ -33,6 +42,7 @@ care-voice = "care_voice.cli:main"
 [project.urls]
 Homepage = "https://github.com/superintelligenceco/care-voice"
 Issues = "https://github.com/superintelligenceco/care-voice/issues"
+Documentation = "https://superintelligenceco.github.io/care-voice/"
 Changelog = "https://github.com/superintelligenceco/care-voice/blob/main/CHANGELOG.md"
 
 [tool.setuptools.packages.find]
@@ -66,7 +76,8 @@ disallow_incomplete_defs = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-ra --strict-markers"
+addopts = "-ra --strict-markers --benchmark-disable"
+markers = ["slow: slower property-based and integration tests, run nightly"]
 
 [tool.coverage.run]
 source = ["care_voice"]

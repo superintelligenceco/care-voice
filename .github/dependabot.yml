@@ -8,7 +8,7 @@ updates:
       prefix: chore(deps)
     groups:
       dev-tools:
-        patterns: ["pytest*", "ruff", "mypy", "types-*"]
+        patterns: ["pytest*", "hypothesis", "ruff", "mypy", "types-*", "mkdocs*"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
