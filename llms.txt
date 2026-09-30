@@ -1,0 +1,27 @@
+# care-voice
+
+> care-voice is an open-source daily voice check-in agent for older adults who live alone. It runs a short scripted conversation (sleep, medication, food, pain, falls, day of the week, mood), extracts structured answers with an offline rule-based extractor or an optional OpenAI-compatible LLM, applies transparent alert rules against the person's own history in SQLite, and notifies caregivers by console, webhook, or email. It ships a terminal simulator, a caregiver web dashboard with a JSON API, and an experimental Twilio adapter. It is not a medical device and not an emergency service. Python 3.11+, runtime dependency PyYAML only, Apache-2.0.
+
+## Docs
+
+- [README](https://github.com/superintelligenceco/care-voice/blob/main/README.md): overview, quickstart, configuration, alert rules reference
+- [Documentation site](https://superintelligenceco.github.io/care-voice/): quickstart, concepts, CLI and API reference, architecture, FAQ, ADRs
+- [Changelog](https://github.com/superintelligenceco/care-voice/blob/main/CHANGELOG.md)
+- [Contributing](https://github.com/superintelligenceco/care-voice/blob/main/CONTRIBUTING.md)
+- [Notes for coding agents](https://github.com/superintelligenceco/care-voice/blob/main/AGENTS.md)
+
+## Key source files
+
+- [cli.py](https://github.com/superintelligenceco/care-voice/blob/main/src/care_voice/cli.py): the `care-voice` command (simulate, history, alerts, validate, serve, call)
+- [engine.py](https://github.com/superintelligenceco/care-voice/blob/main/src/care_voice/engine.py): `CheckinSession` and `run_checkin`
+- [extractors/rules.py](https://github.com/superintelligenceco/care-voice/blob/main/src/care_voice/extractors/rules.py): offline rule-based extractor and safety flags
+- [extractors/llm.py](https://github.com/superintelligenceco/care-voice/blob/main/src/care_voice/extractors/llm.py): optional LLM extractor
+- [risk.py](https://github.com/superintelligenceco/care-voice/blob/main/src/care_voice/risk.py): alert rules
+- [store.py](https://github.com/superintelligenceco/care-voice/blob/main/src/care_voice/store.py): SQLite history
+- [dashboard.py](https://github.com/superintelligenceco/care-voice/blob/main/src/care_voice/dashboard.py): caregiver dashboard and JSON API
+- [data/default_script.yaml](https://github.com/superintelligenceco/care-voice/blob/main/src/care_voice/data/default_script.yaml): bundled check-in script
+
+## Releases
+
+- [Releases](https://github.com/superintelligenceco/care-voice/releases): standalone executables, wheel, sdist, SBOMs, checksums
+- Container image: `ghcr.io/superintelligenceco/care-voice`

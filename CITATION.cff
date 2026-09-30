@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use care-voice in your work, please cite it as below."
+title: "care-voice"
+abstract: >-
+  An open-source daily voice check-in agent for older adults living alone.
+  It runs a short scripted conversation, extracts structured answers,
+  applies transparent alert rules, and notifies caregivers.
+type: software
+authors:
+  - name: "superintelligenceco contributors"
+repository-code: "https://github.com/superintelligenceco/care-voice"
+url: "https://superintelligenceco.github.io/care-voice/"
+license: Apache-2.0
+version: 0.1.0
+date-released: "2026-09-30"
+keywords:
+  - caregiving
+  - voice agent
+  - check-in
+  - aging in place
+  - alerts
