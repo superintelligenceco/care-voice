@@ -4,14 +4,20 @@ A daily voice check-in for older adults who live alone, with plain-language aler
 
 [![CI](https://github.com/superintelligenceco/care-voice/actions/workflows/ci.yml/badge.svg)](https://github.com/superintelligenceco/care-voice/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/superintelligenceco/care-voice/actions/workflows/codeql.yml/badge.svg)](https://github.com/superintelligenceco/care-voice/actions/workflows/codeql.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/superintelligenceco/care-voice/badge)](https://scorecard.dev/viewer/?uri=github.com/superintelligenceco/care-voice)
+[![PyPI](https://img.shields.io/pypi/v/care-voice.svg)](https://pypi.org/project/care-voice/)
+[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-teal.svg)](https://superintelligenceco.github.io/care-voice/)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/superintelligenceco/care-voice?quickstart=1)
 
 > **care-voice is not a medical device and is not for emergencies.** It does not diagnose, treat, or monitor any condition, and it does not contact emergency services. If someone needs urgent help, call your local emergency number.
 
 care-voice asks a short, warm check-in every day: did you sleep, did you take your morning medication, have you eaten, are you in pain, have you had a fall, what day is it, how do you feel. It turns the replies into structured answers, compares them with recent days, and tells a caregiver when something looks off.
 
 ## See it work
+
+![A check-in in the terminal simulator, followed by the stored alerts](docs/assets/demo.gif)
 
 This is a real run of the terminal simulator with the bundled `examples/replies/concerning-day.txt`:
 
@@ -66,6 +72,25 @@ alerts:
   [LOW] NOT_EATEN: Margaret has not eaten yet today.
   [LOW] POOR_SLEEP: Margaret did not sleep well.
 ```
+
+## Install
+
+Pick one of these options:
+
+```bash
+# Python 3.11 or later
+pip install care-voice
+
+# Standalone executable for Linux (x64, arm64) or macOS (arm64, x64), installed to ~/.local/bin
+curl -fsSL https://raw.githubusercontent.com/superintelligenceco/care-voice/main/install.sh | sh
+
+# Caregiver dashboard in a container (linux/amd64, linux/arm64)
+docker run --rm -p 127.0.0.1:8080:8080 ghcr.io/superintelligenceco/care-voice:latest
+```
+
+`install.sh` picks the right executable for your system from the [latest release](https://github.com/superintelligenceco/care-voice/releases/latest) and checks it against `SHA256SUMS`. Set `CARE_VOICE_VERSION=v0.2.0` to pin a release or `CARE_VOICE_INSTALL_DIR` to install elsewhere. Windows users can download `care-voice-windows-x64.exe` from the release. Every release file has a build provenance attestation (`gh attestation verify <file> -R superintelligenceco/care-voice`), and the image is signed with cosign.
+
+The full documentation lives at <https://superintelligenceco.github.io/care-voice/>.
 
 ## Quickstart
 
@@ -148,11 +173,13 @@ care-voice serve    [--config FILE] [--host HOST] [--port PORT] [--twilio]
 care-voice call     [--config FILE] [--to +15555550100]   # experimental
 ```
 
-To run the dashboard in Docker:
+To run the dashboard in Docker from a clone of the repository:
 
 ```bash
 docker compose up --build
 ```
+
+To run the published image instead, download [`deploy/docker-compose.yml`](deploy/docker-compose.yml) (also attached to every release) and run `docker compose up -d`.
 
 Then open <http://127.0.0.1:8080/>. Set `CARE_VOICE_DASHBOARD_PASSWORD` to require HTTP basic authentication.
 
@@ -255,10 +282,13 @@ care-voice does not schedule calls itself. Use cron or a systemd timer to run `c
 ## Development
 
 ```bash
-python3 -m venv .venv && . .venv/bin/activate
-pip install -e ".[dev]"
-ruff check . && ruff format --check . && mypy && pytest --cov
+make setup      # create .venv and install the dev and docs extras plus pre-commit hooks
+make lint typecheck test
+make bench      # compare the benchmarks with the committed baseline
+make docs       # build the documentation site
 ```
+
+Run `make` to list every target. The repository also has a dev container, so you can open it in GitHub Codespaces with nothing installed locally.
 
 ## Roadmap
 
