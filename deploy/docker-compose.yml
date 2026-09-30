@@ -1,0 +1,27 @@
+# Runs the care-voice caregiver dashboard and JSON API from the published image.
+#
+#   docker compose up -d
+#   open http://127.0.0.1:8080/
+#
+# Pin a release with CARE_VOICE_TAG=v0.2.0. The default is the latest release.
+services:
+  care-voice:
+    image: ghcr.io/superintelligenceco/care-voice:${CARE_VOICE_TAG:-latest}
+    ports:
+      # Published on localhost only. Put a reverse proxy with TLS in front
+      # before you expose the dashboard to anyone else.
+      - "127.0.0.1:${CARE_VOICE_PORT:-8080}:8080"
+    environment:
+      # Set a password to require HTTP basic auth on the dashboard.
+      CARE_VOICE_DASHBOARD_PASSWORD: ${CARE_VOICE_DASHBOARD_PASSWORD:-}
+    volumes:
+      - care-voice-data:/data
+      # To use your own config instead of the bundled example, uncomment this
+      # line and the `command` below.
+      # - ./care-voice.yaml:/config/care-voice.yaml:ro
+    # command: ["serve", "--config", "/config/care-voice.yaml", "--db", "/data/care-voice.db",
+    #           "--host", "0.0.0.0", "--port", "8080"]
+    restart: unless-stopped
+
+volumes:
+  care-voice-data:
