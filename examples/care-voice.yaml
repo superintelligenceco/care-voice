@@ -1,0 +1,69 @@
+# Example care-voice configuration. Copy it, edit it, and pass it with
+# `care-voice simulate --config care-voice.yaml`.
+#
+# Secrets never go in this file. Keys ending in `_env` name the environment
+# variable that holds the secret.
+
+person:
+  name: Margaret
+  timezone: Europe/London
+  # Only used by the experimental telephony adapter.
+  phone: "+15555550100"
+
+# "default" uses the bundled script. Point this at your own YAML file to
+# change the questions, for example: script: gentle-evening-script.yaml
+script: default
+
+# Relative paths resolve against this file's directory.
+database: care-voice.db
+
+checkin:
+  max_reprompts: 1        # re-ask an unclear answer this many times
+  max_silences: 3         # end the check-in after this many silences in a row
+  call_attempts: 3        # telephony: tries before recording NO_ANSWER
+  retry_delay_minutes: 10
+
+extractor:
+  kind: rules             # "rules" works offline. "llm" needs the block below.
+  # kind: llm
+  # base_url: https://api.openai.com/v1   # any OpenAI-compatible endpoint
+  # model: gpt-4o-mini
+  # api_key_env: CARE_VOICE_LLM_API_KEY
+
+rules:
+  pain_high_threshold: 7       # pain level (0-10) that makes PAIN_REPORTED high
+  mood_drop_threshold: 1.5     # points below the recent average that trigger MOOD_DROP
+  low_mood_threshold: 2
+  baseline_min_checkins: 3
+  baseline_window: 14
+  unclear_answers_threshold: 2
+  repetition_min_words: 4
+
+notifiers:
+  - kind: console
+    min_severity: low
+  # - kind: webhook
+  #   url: https://example.com/care-voice-hook
+  #   secret_env: CARE_VOICE_WEBHOOK_SECRET
+  #   min_severity: medium
+  # - kind: email
+  #   host: smtp.example.com
+  #   port: 587
+  #   security: starttls
+  #   sender: care-voice@example.com
+  #   recipients: [caregiver@example.com]
+  #   username: care-voice@example.com
+  #   password_env: CARE_VOICE_SMTP_PASSWORD
+  #   min_severity: high
+
+dashboard:
+  host: 127.0.0.1
+  port: 8080
+
+# EXPERIMENTAL. See the README before you enable real calls.
+telephony:
+  provider: twilio
+  from_number: "+15555550199"
+  public_url: https://care-voice.example.com
+  account_sid_env: TWILIO_ACCOUNT_SID
+  auth_token_env: TWILIO_AUTH_TOKEN

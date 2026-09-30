@@ -1,0 +1,9 @@
+# One reply per line. Lines starting with # are ignored.
+# An empty line or (silence) means the person said nothing.
+Yes, I slept quite well thank you
+Yes, I took them with my tea
+I had porridge
+No, I feel fine
+No
+It's Wednesday
+I'd say a four

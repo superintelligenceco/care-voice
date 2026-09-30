@@ -1,0 +1,11 @@
+# A day that should raise several alerts. Run it with --date 2026-09-30,
+# which is a Wednesday.
+Not really, I kept waking up
+No, I forgot them
+Not yet
+Yes, my hip hurts
+About an eight
+My right hip
+I slipped in the bathroom last night
+Is it Sunday?
+Pretty low today
