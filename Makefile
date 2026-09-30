@@ -44,6 +44,7 @@ exe: ## Build a standalone executable for this machine into dist/
 	$(BIN)/python packaging/build_exe.py care-voice-local
 
 docs: ## Build the documentation site into site/
+	$(BIN)/python scripts/gen_cli_docs.py
 	$(BIN)/mkdocs build --strict
 
 docs-serve: ## Serve the documentation site with live reload

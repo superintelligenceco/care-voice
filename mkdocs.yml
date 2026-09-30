@@ -1,0 +1,81 @@
+site_name: care-voice
+site_description: Open-source daily voice check-in agent for older adults living alone, with caregiver alerts.
+site_url: https://superintelligenceco.github.io/care-voice/
+repo_url: https://github.com/superintelligenceco/care-voice
+repo_name: superintelligenceco/care-voice
+edit_uri: edit/main/docs/
+exclude_docs: |
+  demo.tape
+copyright: Copyright superintelligenceco contributors. Apache-2.0.
+
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Concepts: concepts.md
+  - CLI reference: cli.md
+  - Configuration: configuration.md
+  - Alert rules: alert-rules.md
+  - Architecture: architecture.md
+  - Python API: reference.md
+  - FAQ: faq.md
+  - Decisions:
+      - adr/index.md
+      - adr/0001-rule-based-extractor-by-default.md
+      - adr/0002-text-only-core.md
+      - adr/0003-standard-library-dashboard.md
+      - adr/0004-tag-driven-releases.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_source: false
+            show_root_heading: true
+            members_order: source
+            docstring_style: google
+
+validation:
+  links:
+    not_found: warn
+    anchors: warn
