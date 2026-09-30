@@ -47,3 +47,4 @@ site/
 bench.json
 .hypothesis/
 .benchmarks/
+mutants/

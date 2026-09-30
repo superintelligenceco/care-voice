@@ -54,7 +54,7 @@ care_voice = ["data/*.yaml", "py.typed"]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
-src = ["src", "tests"]
+src = ["src", "tests", "scripts", "packaging"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "S", "N"]
@@ -66,7 +66,7 @@ ignore = ["S101"]
 [tool.mypy]
 python_version = "3.11"
 strict = true
-files = ["src", "tests"]
+files = ["src", "tests", "scripts"]
 
 [[tool.mypy.overrides]]
 module = "tests.*"
@@ -86,3 +86,15 @@ branch = true
 [tool.coverage.report]
 show_missing = true
 skip_covered = true
+
+[tool.mutmut]
+# Mutation testing is scoped to the core pure logic. Run it with
+# `mutmut run` or the manual "Mutation testing" workflow.
+source_paths = ["src/"]
+only_mutate = ["src/care_voice/extractors/rules.py", "src/care_voice/risk.py"]
+pytest_add_cli_args_test_selection = [
+  "tests/test_rules_extractor.py",
+  "tests/test_risk.py",
+  "tests/test_properties.py",
+  "tests/test_engine.py",
+]

@@ -1,15 +1,22 @@
 from __future__ import annotations
 
+import os
 from collections.abc import Callable
 from datetime import date, datetime
 from zoneinfo import ZoneInfo
 
 import pytest
+from hypothesis import HealthCheck, settings
 
 from care_voice.engine import CheckinSession
 from care_voice.extractors import ExtractionContext, RuleBasedExtractor
 from care_voice.models import CheckinResult
 from care_voice.script import CheckinScript, load_script
+
+# HYPOTHESIS_PROFILE=nightly runs many more examples; the nightly workflow sets it.
+settings.register_profile("nightly", max_examples=2000, deadline=None)
+settings.register_profile("default", deadline=None, suppress_health_check=[HealthCheck.too_slow])
+settings.load_profile(os.environ.get("HYPOTHESIS_PROFILE", "default"))
 
 # 30 September 2026 is a Wednesday.
 WEDNESDAY = date(2026, 9, 30)
