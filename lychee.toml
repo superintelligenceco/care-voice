@@ -1,0 +1,12 @@
+# Link checker settings for the Links workflow.
+exclude = [
+  "^http://(127\\.0\\.0\\.1|localhost)",
+  "^https://github\\.com/superintelligenceco/care-voice/(compare|releases|pkgs)",
+  "^https://codespaces\\.new/",
+  "^https://pypi\\.org/project/care-voice",
+  "^https://securityscorecards\\.dev",
+  "^https://scorecard\\.dev",
+]
+exclude_path = [".venv", "site", "mutants", "CHANGELOG.md"]
+accept = ["200..=299", "429"]
+max_retries = 3
